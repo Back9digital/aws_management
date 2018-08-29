@@ -1,5 +1,5 @@
 # aws_management_ec2
-> B9 teesheet service
+> B9 AWS EC2 Management service
 
 An AWS Lambda to stop all running Amazon Elastic Compute Cloud (Amazon EC2) instances.
 
