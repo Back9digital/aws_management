@@ -1,0 +1,23 @@
+{
+  "name": "ec2_management",
+  "version": "1.0.0",
+  "description": "Stop all running EC2 instances",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Back9digital/aws_management.git"
+  },
+  "author": "Back9solutions",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Back9digital/aws_management/issues"
+  },
+  "homepage": "https://github.com/Back9digital/aws_management#readme",
+  "dependencies": {
+    "aws-sdk": "^2.279.1",
+    "raven": "^2.6.2"
+  }
+}

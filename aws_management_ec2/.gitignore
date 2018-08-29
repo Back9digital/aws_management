@@ -1,0 +1,11 @@
+deploy.env
+event.json
+.lambda
+.env
+node_modules
+.DS_Store
+docs
+coverage
+build
+.nyc_output/*
+general/*
