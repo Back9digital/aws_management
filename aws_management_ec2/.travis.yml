@@ -1,0 +1,34 @@
+language: node_js
+node_js:
+- '8'
+branches:
+  only:
+  - master
+  - production
+install:
+- npm install -g node-lambda
+- npm install
+- if [[ "$TRAVIS_BRANCH" == "production" ]]; then 
+      snyk protect;
+  fi; 
+script:
+- gulp test
+- node-lambda package -A build -x "test gulpfile.js jsdoc.json context.json README.md";
+after_success:
+ - npm run coverage   
+notifications:
+  email:
+    on_failure: always
+  slack:
+    secure: sbo15ZJnLE7O9jI9tL4HmqOaGv4CpBnlaxrFRZGvcWzeoFi04Vtqm82Xo0LN0VXggaP0DnDJj6pxDJBXh2+HAP6H4NhkMsvM8Jpqle7BHtwObwuJWRdqTJtTYij4eznr8Lzl7UUZuLrgrSd+ywoOT+LSKaD6O5WRiBq5HBcWUYQ4UNx7Ql3AwnJSDENOHopTAjh3NvTXhqJ3rzA2w0mYztXhxgArND9vlmOFL1TAlwqigOt/RFLe/rcRRLpPk23IBFR4s2qSITCKOcCZbLGe3pwN76px9vjKV9FagQg+eOq+aRyt7v3aTlKfsmzDI2Wo94uWqiREEkiXEtx0/cTe7vXh2hs3Cw6dpgSQhD+Gb8EzMxYeJuWJ0Kk6mFaADIV9oAzgZ+CvZO6xl8FjwSyuUfSlaxAStb4SNl0K1rwwpkyJQOHtrELgBvUN2Lo1rE/i5HbcJpI/FCbPppe3EAW/C3Zsnj+b0D+9X+N+/XrphBckxPL64AzVjmvU90E/dIYZ3sK99+Sy3+OQeLUSPukwFcpF3Kk1pornV+jW7Jf/dnfHytlU7rshDTNXRwXpM1m6j0DxoR9QsEKMbtlPWBvEX/QwF5YwoSMALx7aNwJAo+PTgQ6pT3FW+10ifw8jZiKPdLUjBT/h/XYJgL3s/EFCmWLhB0woWe95RiAy+I2Uk24=
+deploy:
+  provider: lambda
+  function_name: aws_management_ec2
+  region: eu-west-1
+  role: arn:aws:iam::118976241431:role/lambda_basic_execution
+  runtime: nodejs8.10
+  handler_name: handler
+  zip: "./build/aws_management_ec2.zip"
+  timeout: 300
+  on:
+    branch: production
