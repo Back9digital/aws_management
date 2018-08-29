@@ -3,7 +3,7 @@
 /**
  * Lambda to stop all running EC2 instances
  *
- * @module ec2
+ * @module aws_management_ec2
  * @exports handler
  * 
  * @requires aws-sdk

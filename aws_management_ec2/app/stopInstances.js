@@ -4,7 +4,7 @@
  * Stop all running instances
  *
  * @module stopInstances
- * @requires aws-sdk
+ * @requires util
  *
  * @version 0.0.1
  */
@@ -12,20 +12,12 @@
 const {promisify} = require('util');
 
 /**
- * Function to retrieve the instance id
- * @param  {Object} instance Object containing instance information
- * @return {String}          The id of the instance
- */
-const getInstanceId = (instance) => {
-	return instance.InstanceId;
-};
-
-/**
  * Stop all running EC2 instances
  *
  * @private
- *
- * @returns {Object} 
+ * 
+ * @param  {Object} config Config object containing listing of running instances
+ * @return {Object}        Result of call to stop instances
  * @throws {Error} 
  */
 module.exports = async (config) => {
@@ -34,11 +26,12 @@ module.exports = async (config) => {
     let instances = config.instances;
 
     if(!instances.length) {
-    	return false;
+        console.log("No running EC2 instances");
+        return false;
     }
 
     let params = {
-    	InstanceIds: instances.map(getInstanceId)
+        InstanceIds: instances.map(instance => instance.InstanceId)
     };
 
     try {

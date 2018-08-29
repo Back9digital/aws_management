@@ -11,7 +11,7 @@
 /**
  * config object
  * 
- * @property {String} env the environement we are in.
+ * @property {String} env the environment we are in.
  * @property {Object} sentry Sentry conf
  * @property {String} sentry.url The Sentry url.
  */

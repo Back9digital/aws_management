@@ -4,7 +4,7 @@
  * Describe all running instances
  *
  * @module describeInstances
- * @requires aws-sdk
+ * @requires util
  *
  * @version 0.0.1
  */
